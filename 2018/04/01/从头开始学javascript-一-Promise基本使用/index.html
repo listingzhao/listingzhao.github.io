@@ -8,17 +8,17 @@
   <link rel="dns-prefetch" href="https://listingzhao.github.io">
   <title>从头开始学javascript(一)-Promise基本使用 | Listing的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="为什么使用Promise回调地狱含义Promise，就是一个对象，用来传递异步操作的消息，它代表了某个未来才会知道结果的事件（通常是一个异步操作）,并且这个事件提供统一的API，可供进一步处理。 特点 对象的状态不受外界影响。内部有3中状态：Pending（进行中）, Resolved(已完成), Rejected(已失败)，只有异步操作的结果可以决定当前的状态  一旦状态改变就不会再变，任何时候">
+  <meta name="description" content="为什么使用Promise背景-回调地狱在工作当中我们往往会遇到多个请求依赖的问题，可能就会有如下的写法 123456789$.post(&quot;/data1&quot;, &amp;#123; data: &quot;data1&quot;&amp;#125;, function(data1) &amp;#123;  if(data.state === &apos;error&apos;) return  $.post(&quot;/data2&quot;, &amp;#123; data: data1">
 <meta property="og:type" content="article">
 <meta property="og:title" content="从头开始学javascript(一)-Promise基本使用">
 <meta property="og:url" content="https://listingzhao.github.io/2018/04/01/从头开始学javascript-一-Promise基本使用/index.html">
 <meta property="og:site_name" content="Listing的博客">
-<meta property="og:description" content="为什么使用Promise回调地狱含义Promise，就是一个对象，用来传递异步操作的消息，它代表了某个未来才会知道结果的事件（通常是一个异步操作）,并且这个事件提供统一的API，可供进一步处理。 特点 对象的状态不受外界影响。内部有3中状态：Pending（进行中）, Resolved(已完成), Rejected(已失败)，只有异步操作的结果可以决定当前的状态  一旦状态改变就不会再变，任何时候">
+<meta property="og:description" content="为什么使用Promise背景-回调地狱在工作当中我们往往会遇到多个请求依赖的问题，可能就会有如下的写法 123456789$.post(&quot;/data1&quot;, &amp;#123; data: &quot;data1&quot;&amp;#125;, function(data1) &amp;#123;  if(data.state === &apos;error&apos;) return  $.post(&quot;/data2&quot;, &amp;#123; data: data1">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-04-01T11:31:10.798Z">
+<meta property="og:updated_time" content="2018-04-01T13:55:04.542Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="从头开始学javascript(一)-Promise基本使用">
-<meta name="twitter:description" content="为什么使用Promise回调地狱含义Promise，就是一个对象，用来传递异步操作的消息，它代表了某个未来才会知道结果的事件（通常是一个异步操作）,并且这个事件提供统一的API，可供进一步处理。 特点 对象的状态不受外界影响。内部有3中状态：Pending（进行中）, Resolved(已完成), Rejected(已失败)，只有异步操作的结果可以决定当前的状态  一旦状态改变就不会再变，任何时候">
+<meta name="twitter:description" content="为什么使用Promise背景-回调地狱在工作当中我们往往会遇到多个请求依赖的问题，可能就会有如下的写法 123456789$.post(&quot;/data1&quot;, &amp;#123; data: &quot;data1&quot;&amp;#125;, function(data1) &amp;#123;  if(data.state === &apos;error&apos;) return  $.post(&quot;/data2&quot;, &amp;#123; data: data1">
   
   
     <link rel="icon" href="/favicon.png">
@@ -168,7 +168,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="为什么使用Promise"><a href="#为什么使用Promise" class="headerlink" title="为什么使用Promise"></a>为什么使用Promise</h3><h4 id="回调地狱"><a href="#回调地狱" class="headerlink" title="回调地狱"></a>回调地狱</h4><h3 id="含义"><a href="#含义" class="headerlink" title="含义"></a>含义</h3><p>Promise，就是一个对象，用来传递异步操作的消息，它代表了某个未来才会知道结果的事件（通常是一个异步操作）,并且这个事件提供统一的API，可供进一步处理。</p>
+        <h3 id="为什么使用Promise"><a href="#为什么使用Promise" class="headerlink" title="为什么使用Promise"></a>为什么使用Promise</h3><h4 id="背景-回调地狱"><a href="#背景-回调地狱" class="headerlink" title="背景-回调地狱"></a>背景-回调地狱</h4><p>在工作当中我们往往会遇到多个请求依赖的问题，可能就会有如下的写法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$.post(<span class="string">"/data1"</span>, &#123; <span class="attr">data</span>: <span class="string">"data1"</span>&#125;, <span class="function"><span class="keyword">function</span>(<span class="params">data1</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(data.state === <span class="string">'error'</span>) <span class="keyword">return</span></span><br><span class="line">  $.post(<span class="string">"/data2"</span>, &#123; <span class="attr">data</span>: data1&#125;, <span class="function"><span class="keyword">function</span>(<span class="params">data2</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(data2.state === <span class="string">'error'</span>) <span class="keyword">return</span></span><br><span class="line">    $.post(<span class="string">"/data3"</span>, &#123; <span class="attr">data</span>: data2&#125;, <span class="function"><span class="keyword">function</span>(<span class="params">data3</span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(data3)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>这里只展示了三个请求间的互相依赖，如果业务复杂一些，需要有5，6个请求的话，代码看起来就有点恐怖了。。<br>Promise的出现正是为了解决这样的问题。</p>
+<h3 id="含义"><a href="#含义" class="headerlink" title="含义"></a>含义</h3><p>Promise，就是一个对象，用来传递异步操作的消息，它代表了某个未来才会知道结果的事件（通常是一个异步操作）,并且这个事件提供统一的API，可供进一步处理。</p>
 <h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><ul>
 <li><p>对象的状态不受外界影响。内部有3中状态：Pending（进行中）, Resolved(已完成), Rejected(已失败)，只有异步操作的结果可以决定当前的状态</p>
 </li>
@@ -270,6 +273,15 @@
   
 <nav id="article-nav">
   
+    <a href="/2018/04/02/理解Vue响应式原理/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          理解Vue响应式原理
+        
+      </div>
+    </a>
+  
   
     <a href="/2018/03/09/npm常用命令/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">npm常用命令</div>
@@ -315,7 +327,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2018 Listing
+    		&copy; 2019 Listing
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
