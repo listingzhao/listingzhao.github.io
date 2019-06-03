@@ -146,6 +146,82 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Object-create方法解析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/22/Object-create方法解析/">Object.create方法解析</a>
+    </h1>
+  
+
+        
+        <a href="/2017/09/22/Object-create方法解析/" class="archive-article-date">
+  	<time datetime="2017-09-22T03:26:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="create-方法"><a href="#create-方法" class="headerlink" title="create 方法"></a>create 方法</h3><p>Object.create() 方法会使用指定的原型对象及其属性去创建一个新的对象。</p>
+<blockquote>
+<p>Object.create(proto, [ propertiesObject ])</p>
+</blockquote>
+<h4 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h4><p><code>proto</code><br>一个对象，应该是新创建的对象的原型。</p>
+<p><code>propertiesObject</code><br>可选。该参数对象是一组属性与值，该对象的属性名称将是新创建的对象的属性名称，值是属性描述符（这些属性描述符的结构与Object.defineProperties()的第二个参数一样）。注意：该参数对象不能是 undefined，另外只有该对象中自身拥有的可枚举的属性才有效，也就是说该对象的原型链上属性是无效的。</p>
+<h3 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h3><p>返回一个新对象。在指定原型对象上添加新属性后的新对象</p>
+<h3 id="抛出异常"><a href="#抛出异常" class="headerlink" title="抛出异常"></a>抛出异常</h3><p>如果 propertiesObject 参数不是 null 也不是对象，则抛出一个 TypeError 异常。</p>
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p>使用 Object.create 实现类式继承</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Shape - superclass</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Shape</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.x = <span class="number">0</span></span><br><span class="line">  <span class="keyword">this</span>.y = <span class="number">0</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Shape.prototype.move = <span class="function"><span class="keyword">function</span> (<span class="params">x, y</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.x += x</span><br><span class="line">  <span class="keyword">this</span>.y += y</span><br><span class="line">  <span class="built_in">console</span>.info(<span class="string">'Shape moved.'</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Rectangle - subclass</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Rectangle</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  Shape.call(<span class="keyword">this</span>) <span class="comment">// call super constructor.</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// subclass extends superclass</span></span><br><span class="line">Rectangle.prototype = <span class="built_in">Object</span>.create(Shape.prototype)</span><br><span class="line">Rectangle.prototype.constructor = Rectangle</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> rect = <span class="keyword">new</span> Rectangle()</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'Is rect an instance of Rectangle?'</span>,</span><br><span class="line">  rect <span class="keyword">instanceof</span> Rectangle) <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'Is rect an instance of Shape?'</span>,</span><br><span class="line">  rect <span class="keyword">instanceof</span> Shape) <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line">rect.move(<span class="number">1</span>, <span class="number">1</span>) <span class="comment">// Outputs, "Shape moved."</span></span><br></pre></td></tr></table></figure>
+<p>继承到多个对象,则可以使用混入的方式。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">MyClass</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">     SuperClass.call(<span class="keyword">this</span>);</span><br><span class="line">     OtherSuperClass.call(<span class="keyword">this</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// inherit one class</span></span><br><span class="line">MyClass.prototype = <span class="built_in">Object</span>.create(SuperClass.prototype);</span><br><span class="line"><span class="comment">// mixin another</span></span><br><span class="line"><span class="built_in">Object</span>.assign(MyClass.prototype, OtherSuperClass.prototype);</span><br><span class="line"><span class="comment">// re-assign constructor</span></span><br><span class="line">MyClass.prototype.constructor = MyClass;</span><br><span class="line"></span><br><span class="line">MyClass.prototype.myMethod = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">     <span class="comment">// do a thing</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>使用 Object.create 的 propertyObject 参数</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建一个原型为null的空对象</span></span><br><span class="line">o = <span class="built_in">Object</span>.create(<span class="literal">null</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">o = &#123;&#125;;</span><br><span class="line"><span class="comment">// 以字面量方式创建的空对象就相当于:</span></span><br><span class="line">o = <span class="built_in">Object</span>.create(<span class="built_in">Object</span>.prototype);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">o = <span class="built_in">Object</span>.create(<span class="built_in">Object</span>.prototype, &#123;</span><br><span class="line">  <span class="comment">// foo会成为所创建对象的数据属性</span></span><br><span class="line">  foo: &#123;</span><br><span class="line">    writable:<span class="literal">true</span>,</span><br><span class="line">    configurable:<span class="literal">true</span>,</span><br><span class="line">    value: <span class="string">"hello"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// bar会成为所创建对象的访问器属性</span></span><br><span class="line">  bar: &#123;</span><br><span class="line">    configurable: <span class="literal">false</span>,</span><br><span class="line">    get: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; <span class="keyword">return</span> <span class="number">10</span> &#125;,</span><br><span class="line">    set: <span class="function"><span class="keyword">function</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">"Setting `o.bar` to"</span>, value);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Constructor</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line">o = <span class="keyword">new</span> Constructor();</span><br><span class="line"><span class="comment">// 上面的一句就相当于:</span></span><br><span class="line">o = <span class="built_in">Object</span>.create(Constructor.prototype);</span><br><span class="line"><span class="comment">// 当然,如果在Constructor函数中有一些初始化代码,Object.create不能执行那些代码</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建一个以另一个空对象为原型,且拥有一个属性p的对象</span></span><br><span class="line">o = <span class="built_in">Object</span>.create(&#123;&#125;, &#123; <span class="attr">p</span>: &#123; <span class="attr">value</span>: <span class="number">42</span> &#125; &#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 省略了的属性特性默认为false,所以属性p是不可写,不可枚举,不可配置的:</span></span><br><span class="line">o.p = <span class="number">24</span></span><br><span class="line">o.p</span><br><span class="line"><span class="comment">//42</span></span><br><span class="line"></span><br><span class="line">o.q = <span class="number">12</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> prop <span class="keyword">in</span> o) &#123;</span><br><span class="line">   <span class="built_in">console</span>.log(prop)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//"q"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">delete</span> o.p</span><br><span class="line"><span class="comment">//false</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//创建一个可写的,可枚举的,可配置的属性p</span></span><br><span class="line">o2 = <span class="built_in">Object</span>.create(&#123;&#125;, &#123;</span><br><span class="line">  p: &#123;</span><br><span class="line">    value: <span class="number">42</span>,</span><br><span class="line">    writable: <span class="literal">true</span>,</span><br><span class="line">    enumerable: <span class="literal">true</span>,</span><br><span class="line">    configurable: <span class="literal">true</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/09/22/Object-create方法解析/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-call和apply与bind" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
