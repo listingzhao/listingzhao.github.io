@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://listingzhao.github.io">
-  <title>基本排序 | Listing的博客</title>
+  <title>ssh配置 | Listing的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="冒泡排序 和 快速排序123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051public class Solution &amp;#123;    /**     * @param A: an integer array     * @return: nothing">
+  <meta name="description" content="简介Mac os 下，ssh证书是默认存放在 ~/.ssh 目录下的，Linux系统也是如此。默认的ssh-key文件是：id_rsa 和 id_rsa.pub。 你可以使用一个ssh-key用于多个服务器之间的登录，也可以针对不同的服务器，使用不同的ssh-key文件。 生成证书1ssh-keygen 将公钥安装到远程服务器上1ssh-copy-id -i ~/.ssh/test_rsa.pub">
 <meta property="og:type" content="article">
-<meta property="og:title" content="基本排序">
-<meta property="og:url" content="https://listingzhao.github.io/2019/06/03/基本排序/index.html">
+<meta property="og:title" content="ssh配置">
+<meta property="og:url" content="https://listingzhao.github.io/2019/06/09/ssh配置/index.html">
 <meta property="og:site_name" content="Listing的博客">
-<meta property="og:description" content="冒泡排序 和 快速排序123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051public class Solution &amp;#123;    /**     * @param A: an integer array     * @return: nothing">
+<meta property="og:description" content="简介Mac os 下，ssh证书是默认存放在 ~/.ssh 目录下的，Linux系统也是如此。默认的ssh-key文件是：id_rsa 和 id_rsa.pub。 你可以使用一个ssh-key用于多个服务器之间的登录，也可以针对不同的服务器，使用不同的ssh-key文件。 生成证书1ssh-keygen 将公钥安装到远程服务器上1ssh-copy-id -i ~/.ssh/test_rsa.pub">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-06-03T08:16:11.915Z">
+<meta property="og:updated_time" content="2019-06-09T01:57:30.587Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="基本排序">
-<meta name="twitter:description" content="冒泡排序 和 快速排序123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051public class Solution &amp;#123;    /**     * @param A: an integer array     * @return: nothing">
+<meta name="twitter:title" content="ssh配置">
+<meta name="twitter:description" content="简介Mac os 下，ssh证书是默认存放在 ~/.ssh 目录下的，Linux系统也是如此。默认的ssh-key文件是：id_rsa 和 id_rsa.pub。 你可以使用一个ssh-key用于多个服务器之间的登录，也可以针对不同的服务器，使用不同的ssh-key文件。 生成证书1ssh-keygen 将公钥安装到远程服务器上1ssh-copy-id -i ~/.ssh/test_rsa.pub">
   
   
     <link rel="icon" href="/favicon.png">
@@ -148,27 +148,32 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-基本排序" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-ssh配置" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      基本排序
+      ssh配置
     </h1>
   
 
         
-        <a href="/2019/06/03/基本排序/" class="archive-article-date">
-  	<time datetime="2019-06-03T07:59:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-03</time>
+        <a href="/2019/06/09/ssh配置/" class="archive-article-date">
+  	<time datetime="2019-06-09T01:49:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-09</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="冒泡排序-和-快速排序"><a href="#冒泡排序-和-快速排序" class="headerlink" title="冒泡排序 和 快速排序"></a>冒泡排序 和 快速排序</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> A: an integer array</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span>: nothing</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sortIntegers</span><span class="params">(<span class="keyword">int</span>[] A)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 冒泡</span></span><br><span class="line">        <span class="comment">// for(int i=0; i&lt;A.length - 1; i++) &#123;</span></span><br><span class="line">        <span class="comment">//     for(int j=i+1;j &lt; A.length - 1; j++) &#123;</span></span><br><span class="line">        <span class="comment">//         if(A[i] &gt; A[j]) &#123;</span></span><br><span class="line">        <span class="comment">//             int temp = A[j];</span></span><br><span class="line">        <span class="comment">//             A[j] = A[i];</span></span><br><span class="line">        <span class="comment">//             A[i] = temp;</span></span><br><span class="line">        <span class="comment">//         &#125;else &#123;</span></span><br><span class="line">        <span class="comment">//             continue;</span></span><br><span class="line">        <span class="comment">//         &#125;</span></span><br><span class="line">        <span class="comment">//     &#125;</span></span><br><span class="line">        <span class="comment">// &#125;</span></span><br><span class="line">        <span class="comment">// 快速排序</span></span><br><span class="line">        quickSort(A,<span class="number">0</span>, A.length - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">quickSort</span><span class="params">(<span class="keyword">int</span>[] A, <span class="keyword">int</span> left,<span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(left&gt;=right) <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">int</span> pivot = A[left];</span><br><span class="line">        <span class="keyword">int</span> i = left;</span><br><span class="line">        <span class="keyword">int</span> j = right;</span><br><span class="line">        <span class="keyword">while</span>(i!=j) &#123;</span><br><span class="line">            <span class="comment">// 右边找小于pivot的数</span></span><br><span class="line">            <span class="keyword">while</span>(A[j]&gt;=pivot &amp;&amp; i&lt;j) &#123;</span><br><span class="line">                j--;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 左边找大于pivot的数</span></span><br><span class="line">            <span class="keyword">while</span>(A[i]&lt;=pivot &amp;&amp; i&lt;j) &#123;</span><br><span class="line">                i++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(i&lt;j) &#123;</span><br><span class="line">                <span class="keyword">int</span> temp = A[j];</span><br><span class="line">                A[j] = A[i];</span><br><span class="line">                A[i] = temp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//归位</span></span><br><span class="line">        A[left] = A[i];</span><br><span class="line">        A[i] = pivot;</span><br><span class="line"></span><br><span class="line">        quickSort(A, left, i-<span class="number">1</span>);</span><br><span class="line">        quickSort(A, i+<span class="number">1</span>, right);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>Mac os 下，ssh证书是默认存放在 ~/.ssh 目录下的，Linux系统也是如此。默认的ssh-key文件是：id_rsa 和 id_rsa.pub。</p>
+<p>你可以使用一个ssh-key用于多个服务器之间的登录，也可以针对不同的服务器，使用不同的ssh-key文件。</p>
+<h3 id="生成证书"><a href="#生成证书" class="headerlink" title="生成证书"></a>生成证书</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen</span><br></pre></td></tr></table></figure>
+<h3 id="将公钥安装到远程服务器上"><a href="#将公钥安装到远程服务器上" class="headerlink" title="将公钥安装到远程服务器上"></a>将公钥安装到远程服务器上</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-copy-id -i ~/.ssh/test_rsa.pub username@remote</span><br></pre></td></tr></table></figure>
+<h3 id="修改config配置文件（自定义key需要）"><a href="#修改config配置文件（自定义key需要）" class="headerlink" title="修改config配置文件（自定义key需要）"></a>修改config配置文件（自定义key需要）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 登录服务器：192.169.1.1，使用私钥test_rsa</span></span><br><span class="line">Host 192.169.1.1</span><br><span class="line">User username</span><br><span class="line">IdentityFile ~/.ssh/test_rsa</span><br></pre></td></tr></table></figure>
+<h3 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh root@39.100.127.79</span><br></pre></td></tr></table></figure>
 
       
 
@@ -248,7 +253,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=https://listingzhao.github.io/2019/06/03/基本排序/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=https://listingzhao.github.io/2019/06/09/ssh配置/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -262,18 +267,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/06/09/ssh配置/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          ssh配置
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/05/16/Docker实践/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Docker实践</div>
+    <a href="/2019/06/03/基本排序/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">基本排序</div>
       <i class="icon-circle-right"></i>
     </a>
   
